@@ -3,6 +3,10 @@ package com.mlopez.interviewfullstack
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import com.mlopez.interviewfullstack.databinding.ActivityMainBinding
 import com.mlopez.interviewfullstack.models.ResponseModel
 import com.mlopez.interviewfullstack.models.ResponseProduct
 import com.mlopez.interviewfullstack.models.ResponseUser
@@ -15,10 +19,26 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initAPICall()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        initAPICall()
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+                as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.userFragment,
+                R.id.productFragment
+            )
+        )
+
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
     }
 
