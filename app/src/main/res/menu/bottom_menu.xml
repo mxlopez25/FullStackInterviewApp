@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:icon="@drawable/ic_baseline_person_24"
-        android:id="@+id/homeFragment"
+        android:id="@+id/userFragment"
         android:title="@string/users" />
     <item
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:id="@+id/gpsFragment"
+        android:id="@+id/productFragment"
         android:title="@string/products" />
 </menu>
