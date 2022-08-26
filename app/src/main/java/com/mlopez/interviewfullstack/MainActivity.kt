@@ -3,6 +3,7 @@ package com.mlopez.interviewfullstack
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -11,6 +12,8 @@ import com.mlopez.interviewfullstack.models.ResponseModel
 import com.mlopez.interviewfullstack.models.ResponseProduct
 import com.mlopez.interviewfullstack.models.ResponseUser
 import com.mlopez.interviewfullstack.models.Users
+import com.mlopez.interviewfullstack.repositories.ProductApiRepository
+import com.mlopez.interviewfullstack.repositories.UserApiRepository
 import com.mlopez.interviewfullstack.utils.ProductApiService
 import com.mlopez.interviewfullstack.utils.UserApiClient
 import com.mlopez.interviewfullstack.utils.UserApiService
@@ -20,11 +23,19 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedViewModel: SharedViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        initAPICall()
+
+        val userApi = UserApiRepository()
+        val productApi = ProductApiRepository()
+        val viewModelFactory = SharedViewModelFactory(userApi, productApi)
+        sharedViewModel = ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
+
+        sharedViewModel.fetchAllUsers()
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
                 as NavHostFragment
@@ -39,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
 
     }
 
