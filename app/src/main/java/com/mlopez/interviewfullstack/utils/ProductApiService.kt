@@ -10,11 +10,11 @@ interface ProductApiService {
     fun getAllProducts(): Call<ResponseProduct>
 
     @GET("Product/{id}")
-    fun getProductById(@Path("id") productId: Int)
+    fun getProductById(@Path("id") productId: Int): Call<ResponseProduct>
 
     @POST("Product/create")
-    fun createProduct(@Body product: Product)
+    fun createProduct(@Body product: Product): Call<ResponseProduct>
 
     @PUT("Product/update")
-    fun updateProduct(@Body product: Product)
+    fun updateProduct(@Body product: Product): Call<ResponseProduct>
 }
