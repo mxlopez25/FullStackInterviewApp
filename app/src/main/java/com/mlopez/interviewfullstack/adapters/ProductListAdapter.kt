@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mlopez.interviewfullstack.R
 import com.mlopez.interviewfullstack.models.Product
@@ -18,7 +19,12 @@ class ProductListAdapter(private val list: List<Product>): RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvProductName.text = list[position].name
+        val product = list[position]
+        holder.tvProductName.text = product.name
+
+        holder.clProductContainer.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -26,6 +32,7 @@ class ProductListAdapter(private val list: List<Product>): RecyclerView.Adapter<
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val tvProductName = itemView.findViewById<TextView>(R.id.tvProductName)
+        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
+        val clProductContainer: ConstraintLayout = itemView.findViewById(R.id.clProductContainer)
     }
 }

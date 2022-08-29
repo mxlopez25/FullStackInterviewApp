@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mlopez.interviewfullstack.R
 import com.mlopez.interviewfullstack.models.Users
@@ -18,7 +20,12 @@ class UserListAdapter(private val list: List<Users>): RecyclerView.Adapter<UserL
     }
 
     override fun onBindViewHolder(holder: UserListAdapter.ViewHolder, position: Int) {
-        holder.tvName.text = "${list[position].firstName} ${list[position].lastName}"
+        val user = list[position]
+        holder.tvName.text = "${user.firstName} ${user.lastName}"
+
+        holder.clContainer.setOnClickListener {
+            Toast.makeText(ctx, "${user.firstName} ${user.lastName}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -27,5 +34,6 @@ class UserListAdapter(private val list: List<Users>): RecyclerView.Adapter<UserL
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tvName)
+        val clContainer: ConstraintLayout = itemView.findViewById(R.id.clContainer)
     }
 }
