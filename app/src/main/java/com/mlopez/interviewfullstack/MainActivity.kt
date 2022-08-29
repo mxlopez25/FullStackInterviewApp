@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel = ViewModelProvider(this, viewModelFactory)[SharedViewModel::class.java]
 
         sharedViewModel.fetchAllUsers()
+        sharedViewModel.fetchAllProducts()
+
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
                 as NavHostFragment

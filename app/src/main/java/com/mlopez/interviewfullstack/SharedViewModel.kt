@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mlopez.interviewfullstack.models.Product
+import com.mlopez.interviewfullstack.models.ResponseProduct
 import com.mlopez.interviewfullstack.models.ResponseUser
 import com.mlopez.interviewfullstack.models.Users
 import com.mlopez.interviewfullstack.repositories.ProductApiRepository
@@ -59,7 +60,7 @@ private val productRepo: ProductApiRepository): ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ResponseUser>, t: Throwable) {
-                    Log.d(TAG, "GetAllUser request failed")
+                    Log.d(TAG, "GetAllUser request failed, Error: ${t.message}")
 
                 }
 
@@ -81,10 +82,31 @@ private val productRepo: ProductApiRepository): ViewModel() {
                 }
 
                 override fun onFailure(call: Call<ResponseUser>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.d(TAG, "fetchUserById request failed, Error: ${t.message}")
                 }
 
             })
+        }
+    }
+
+    fun fetchAllProducts() {
+        viewModelScope.launch {
+            val call = productRepo.getAllProduct()
+            call.enqueue(object :  Callback<ResponseProduct> {
+                override fun onResponse(
+                    call: Call<ResponseProduct>,
+                    response: Response<ResponseProduct>
+                ) {
+                    Log.d(TAG, "Products count: ${response.body()?.products?.count()}")
+                    _products.value = response.body()?.products
+                }
+
+                override fun onFailure(call: Call<ResponseProduct>, t: Throwable) {
+                    Log.d(TAG, "fetchAllProducts request failed, Error: ${t.message}")
+                }
+
+            })
+
         }
     }
 }

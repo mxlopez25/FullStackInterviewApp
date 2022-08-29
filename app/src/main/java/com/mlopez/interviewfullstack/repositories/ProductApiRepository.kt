@@ -6,7 +6,7 @@ import retrofit2.Call
 
 class ProductApiRepository {
     suspend fun getProduct(id: Int): Call<ResponseProduct> {
-        return RetrofitInstance.productApiClient.getProduct(id)
+        return RetrofitInstance.productApiClient.getProductById(id)
     }
 
     suspend fun createProduct(product: Product): Call<ResponseProduct> {
@@ -14,7 +14,7 @@ class ProductApiRepository {
     }
 
     suspend fun getAllProduct(): Call<ResponseProduct> {
-        return RetrofitInstance.productApiClient.getAllProduct()
+        return RetrofitInstance.productApiClient.getAllProducts()
     }
 
     suspend fun updateProduct(product: Product): Call<ResponseProduct> {

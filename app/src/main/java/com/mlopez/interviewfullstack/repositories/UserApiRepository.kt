@@ -10,7 +10,7 @@ class UserApiRepository {
     }
 
     suspend fun getUser(id: Int): Call<ResponseUser> {
-        return RetrofitInstance.userApiClient.getUser(id)
+        return RetrofitInstance.userApiClient.getUserById(id)
     }
 
     suspend fun createUser(user: Users): Call<ResponseUser> {
