@@ -16,4 +16,8 @@ class UserApiRepository {
     suspend fun createUser(user: Users): Call<ResponseUser> {
         return RetrofitInstance.userApiClient.createUser(user)
     }
+
+    suspend fun updateUser(user: Users): Call<ResponseUser> {
+        return RetrofitInstance.userApiClient.updateUser(user)
+    }
 }

@@ -18,4 +18,7 @@ interface UserApiService {
 
     @POST("User/create")
     fun createUser(@Body user: Users): Call<ResponseUser>
+
+    @PUT("User/update")
+    fun updateUser(@Body user: Users): Call<ResponseUser>
 }
