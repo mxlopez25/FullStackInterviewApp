@@ -30,6 +30,8 @@ class UserListAdapter(private val list: List<Users>): RecyclerView.Adapter<UserL
         holder.clContainer.setOnClickListener {
             val intent = Intent(ctx, DetailsActivity::class.java)
 
+            intent.putExtra(Constants.TYPE, Constants.USER_TYPE)
+
             intent.putExtra(Constants.USER_ID_LABEL, Constants.USER_ID)
             intent.putExtra(Constants.USER_ID_VALUE, user.id)
 

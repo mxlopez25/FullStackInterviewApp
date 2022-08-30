@@ -27,6 +27,8 @@ class ProductListAdapter(private val list: List<Product>): RecyclerView.Adapter<
         holder.clProductContainer.setOnClickListener {
             val intent = Intent()
 
+            intent.putExtra(Constants.TYPE, Constants.PRODUCT_TYPE)
+
             intent.putExtra(Constants.PRODUCT_ID_LABEL, Constants.PRODUCT_ID)
             intent.putExtra(Constants.PRODUCT_NAME_VALUE, product.id)
 

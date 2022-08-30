@@ -2,6 +2,11 @@ package com.mlopez.interviewfullstack.utils
 
 class Constants {
     companion object {
+        val TYPE = "TYPE"
+
+        val USER_TYPE = "USER_TYPE"
+        val PRODUCT_TYPE = "PRODUCT_TYPE"
+
         val USER_ID = "ID: "
         val USER_ID_LABEL = "user_id_label"
         val USER_ID_VALUE = "user_id_value"
