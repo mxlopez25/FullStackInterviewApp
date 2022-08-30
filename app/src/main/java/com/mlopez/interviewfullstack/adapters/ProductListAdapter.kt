@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.mlopez.interviewfullstack.DetaileProductsActivity
 import com.mlopez.interviewfullstack.R
 import com.mlopez.interviewfullstack.models.Product
 import com.mlopez.interviewfullstack.utils.Constants
@@ -25,12 +27,12 @@ class ProductListAdapter(private val list: List<Product>): RecyclerView.Adapter<
         holder.tvProductName.text = product.name
 
         holder.clProductContainer.setOnClickListener {
-            val intent = Intent()
+            val intent = Intent(ctx, DetaileProductsActivity::class.java)
 
             intent.putExtra(Constants.TYPE, Constants.PRODUCT_TYPE)
 
             intent.putExtra(Constants.PRODUCT_ID_LABEL, Constants.PRODUCT_ID)
-            intent.putExtra(Constants.PRODUCT_NAME_VALUE, product.id)
+            intent.putExtra(Constants.PRODUCT_ID_VALUE, product.id)
 
             intent.putExtra(Constants.PRODUCT_NAME_LABEL, Constants.PRODUCT_NAME)
             intent.putExtra(Constants.PRODUCT_NAME_VALUE, product.name)
@@ -40,6 +42,8 @@ class ProductListAdapter(private val list: List<Product>): RecyclerView.Adapter<
 
             intent.putExtra(Constants.PRODUCT_PRICE_LABEL, Constants.PRODUCT_PRICE)
             intent.putExtra(Constants.PRODUCT_PRICE_VALUE, product.price)
+
+            startActivity(ctx, intent, null)
         }
     }
 
