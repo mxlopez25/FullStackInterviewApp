@@ -1,5 +1,6 @@
 package com.mlopez.interviewfullstack
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,6 +41,11 @@ class UserFragment : Fragment() {
         sharedViewModel.users.observe(viewLifecycleOwner) {
             binding.rvUserList.adapter = UserListAdapter(it)
             binding.rvUserList.layoutManager = LinearLayoutManager(context)
+        }
+
+        binding.fabUser.setOnClickListener {
+            val intent = Intent(context, DetailsActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root

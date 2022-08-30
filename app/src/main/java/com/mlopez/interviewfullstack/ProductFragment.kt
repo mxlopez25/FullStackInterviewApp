@@ -1,5 +1,6 @@
 package com.mlopez.interviewfullstack
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,11 @@ class ProductFragment : Fragment() {
         sharedViewModel.products.observe(viewLifecycleOwner) {
             binding.rvProductList.adapter = ProductListAdapter(it)
             binding.rvProductList.layoutManager = LinearLayoutManager(context)
+        }
+
+        binding.fabProduct.setOnClickListener {
+            val intent = Intent(context, DetaileProductsActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root
